@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="ativjs/calculator_icon_150972.png">
+    <title>Calculadora</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #217436;
+        }
+        .calculadora {
+            border: 3px solid #073d27;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .calculadora h1 {
+            text-align: center;
+        }
+        .calculadora input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #073d27;
+            border-radius: 40px;
+        }
+        .calculadora button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 40px;
+        }
+        .calculadora button:hover {
+            background-color: #8ee0a3;
+        }
+        .calculadora .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculadora">
+        <h1>Minha Calculadora</h1>
+        <label for="num1">Primeiro Número</label>
+        <input type="number" id="num1" value="">
+        <label for="num2">Segundo Número</label>
+        <input type="number" id="num2" value="">
+        <div>
+            <button onclick="calculate('add')">Soma</button>
+            <button onclick="calculate('subtract')">Subtrair</button>
+            <button onclick="calculate('multiply')">Multiplicar</button>
+            <button onclick="calculate('divide')">Dividir</button>
+            <button onclick="clearResult()">Limpar</button> <!--botão para limpar o resultado da calculadora-->
+        </div>
+        <div class="result" id="result"> </div>
+    </div>
+
+    <script>
+        function calculate(operation) {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            let result;
+
+            switch (operation) {
+                case 'add':
+                    result = num1 + num2;
+                    break;
+                case 'subtract':
+                    result = num1 - num2;
+                    break;
+                case 'multiply':
+                    result = num1 * num2;
+                    break;
+                case 'divide':
+                    result = num1 / num2;
+                    break;
+            }
+
+            document.getElementById('result').textContent = `O Resultado é: ${result}`;
+        }
+
+        function clearResult() {
+            document.getElementById('result').textContent = '';
+            document.getElementById('num1').value = '';
+            document.getElementById('num2').value = '';
+        }
+
+        // Atribui funções às teclas do teclado
+        document.addEventListener('keydown', function(event) {
+            switch (event.key) {
+                case '+':
+                    calculate('add'); // tecla + executa a soma
+                    break;
+                case '-':
+                    calculate('subtract'); // tecla - executa a subtração
+                    break;
+                case '*':
+                    calculate('multiply'); // tecla * executa a multiplicação
+                    break;
+                case '/':
+                    calculate('divide'); // tecla / executa a divisão
+                    break;
+                case 'c':
+                    clearResult(); // tecla c limpa o resultado
+                    break;
+            }
+        });
+    </script>
+
+</body>
+</html>
